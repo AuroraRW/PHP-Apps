@@ -16,7 +16,9 @@ class Task{
 
     public function create(){
         // "INSERT INTO tasks(task) VALUES('task')"
-        $query = "INSERT INTO tasks(task) VALUES('" . $this->task . "')";
+        $query = "INSERT INTO tasks(task) VALUES('{$this->task}')";
+
+        // $query = "INSERT INTO tasks(task) VALUES('" . $this->task . "')";
 
         return $this->conn->query($query); 
     }

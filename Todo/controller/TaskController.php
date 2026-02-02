@@ -25,7 +25,9 @@ class TaskController{
     }
     public function updateTask($id, $is_completed){
         $this->taskModel->id = $id;
-        $this->taskModel->update($is_completed);
+        $this->taskModel->is_completed = $is_completed;
+        $this->taskModel->update();
+        
         header("Location:".$_SERVER['PHP_SELF']);
         exit;
     }
