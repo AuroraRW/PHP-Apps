@@ -40,8 +40,6 @@
                     <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                     <button type="submit"name="delete_task">Delete</button>
                 </form>
-
-            <form action=""></form>
         </div>
     
     <?php endwhile; ?>
