@@ -11,12 +11,14 @@ class TaskController{
         $this->taskModel = new Task($db);
     }
     public function addTask(){
+        // send by the raw body of the HTTP request.
         $jsonData = file_get_contents("php://input");
+        // true: convert json data to associative array, false: convert json data to object
         $data = json_decode($jsonData, true);
         $this->taskModel->task = $data['task'];
         $result = $this->taskModel->create(); 
         if($result){
-          echo json_encode(["task"=>$data["task"]]);
+            echo json_encode(["task"=>$data["task"]]);
         }else{
             echo json_encode(["message"=>"Task not added"]);
         }
@@ -25,18 +27,21 @@ class TaskController{
         $jsonData = file_get_contents("php://input");
         $data = json_decode($jsonData, true);
         $this->taskModel->id = $id;
-        $result = $this->taskModel->update($data['is_completed']);
+        $this->taskModel->is_completed = $data['is_completed'];
+
+        $result = $this->taskModel->update();
         if($result){
             echo json_encode(["id"=>$id, "is_completed"=>$data["is_completed"]]);
           }else{
-              echo json_encode(["message"=>"Task not updated"]);
-          }
+            echo json_encode(["message"=>"Task not updated"]);
+        }
     }
+
     public function deleteTask($id){
         $this->taskModel->id = $id;
         $this->taskModel->delete();
-        header("Location:".$_SERVER['PHP_SELF']);
-        exit;
+        // header("Location:".$_SERVER['PHP_SELF']);
+        // exit;
     }
     public function index(){
         $tasks = $this->taskModel->read();

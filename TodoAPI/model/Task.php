@@ -21,8 +21,8 @@ class Task{
         return $this->conn->query($query); 
     }
 
-    public function update($is_completed){
-        $query = "UPDATE tasks SET is_completed = $is_completed WHERE id = " . $this->id;
+    public function update(){
+        $query = "UPDATE tasks SET is_completed = $this->is_completed WHERE id = $this->id";
         return $this->conn->query($query); 
     }
 
