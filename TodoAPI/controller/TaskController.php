@@ -50,7 +50,9 @@ class TaskController{
             // error
             echo json_encode(["message"=>"No tasks found"]);
         }else{
+            // convert $tasks to associative array
             $data = $tasks->fetch_all(MYSQLI_ASSOC);
+            // convert associative array to json data
             $jsonData = json_encode($data);
             echo $jsonData;
         }
